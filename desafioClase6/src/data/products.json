@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "title": "Primer Producto",
+        "description": "El primer producto",
+        "price": 100,
+        "thumbnail": "https://www.google.com.ar/",
+        "code": "A1110/01",
+        "stock": 30
+    },
+    {
+        "id": 2,
+        "title": "Segundo Producto",
+        "description": "El segundo producto",
+        "price": 500,
+        "thumbnail": "https://www.google.com.ar/",
+        "code": "A1110/02",
+        "stock": 20
+    },
+    {
+        "id": 3,
+        "title": "Tercer Producto",
+        "description": "El tercer producto",
+        "price": 1000,
+        "thumbnail": "https://www.google.com.ar/",
+        "code": "A1110/03",
+        "stock": 5
+    },
+    {
+        "id": 4,
+        "title": "Cuarto Producto",
+        "description": "El cuarto producto",
+        "price": 150,
+        "thumbnail": "https://www.google.com.ar/",
+        "code": "A1110/04",
+        "stock": 5
+    },
+    {
+        "id": 5,
+        "title": "Quinto Producto",
+        "description": "El quinto producto",
+        "price": 200,
+        "thumbnail": "https://www.google.com.ar/",
+        "code": "A1110/05",
+        "stock": 10
+    }
+]
