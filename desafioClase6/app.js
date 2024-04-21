@@ -17,17 +17,17 @@ app.get("/products", async (req, res) => {
         return res.json({ status: 200, response: products}); // si no da error se muestra el status 200 (todo ok) y como response con el método json del objeto de respuesta se muestran los productos
     } catch (error) {
         console.log(error);
-        return res.json({ status: 500, response: error.message });
+        return res.json({ status: 500, response: error.message }); // se establece el estatus del error y un mensaje para su corrección
     }
 });
 
-app.get("/products/:pid", async (req, res) => {
+app.get("/products/:pid", async (req, res) => { // petición de producto por id
     try {
-        const { pid } = req.params; // se desestructura el query
+        const { pid } = req.params; // se desestructura el parámetro id como pid
         
-        const product = await productManager.getProductById(+pid);
+        const product = await productManager.getProductById(+pid); //se llama a la función "getProductById" y se le asigna el "pid" por parámetro
 
-        return res.json({ status: 200, response: product
+        return res.json({ status: 200, response: product // se muestra el producto con el id correspondiente
         })
     } catch (error) {
         console.log(error);
