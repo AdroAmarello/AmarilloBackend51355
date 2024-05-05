@@ -21,7 +21,7 @@ async function addProduct(req, res) { // lógica de carga de un nuevo producto
 
     } catch (error) {
         console.log(error);
-        return res.json({ status: error.status || 500, response: error.message || "Error" });
+        return res.json({ status: error.status || 400, response: error.message || "Error" });
     }
 };
 
@@ -66,7 +66,7 @@ async function updateProductById (req, res) { // lógica de modificación de un 
         const { pid } = req.params; // captura el parámetro
         const dataProduct = req.body; // captura el objeto con las modificaciones
 
-        const updateProduct = await productManager.updateProductById(pid, dataProduct);
+        const updateProduct = await productManager.updateProductById(+pid, dataProduct);
 
         res.status(200).json(updateProduct);
         // return res.json({ status: 200, response: updateProduct});

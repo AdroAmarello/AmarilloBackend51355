@@ -96,7 +96,7 @@
         "price": 3000,
         "thumbnail": "https://www.google.com.ar/",
         "code": "A311/501",
-        "category": "herrajes",
+        "category": "categoryPostmanCambiado",
         "stock": 3
     },
     {

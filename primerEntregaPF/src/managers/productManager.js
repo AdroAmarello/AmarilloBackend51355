@@ -31,12 +31,14 @@ const addProduct = async (product) => {
 		console.log(
 			`El producto ${title} con el código ${code} ya existe`
 		);
+        throw Error (`El producto ${title} con el código ${code} ya existe`);
 		return;
 	}
 
     // Validación de que todos los campos sean ingresados correctamente mediante la verificación de que ninguna propiedad obtenga como valor "undefined"
     if(Object.values(newProduct).includes(undefined)) {
         console.log("Todos los campos son obligatorios");
+        throw Error ("Todos los campos son obligatorios")
         return;
     }
 
@@ -80,9 +82,9 @@ const getProductById = async (pid) => {
 // Función que permite modificación de propiedades de un producto sin alterar el ID
 
 const updateProductById = async (pid, dataProduct) => {
-    await getProducts(pid); // se traen los productos del archivo .json
+    await getProducts(); // se traen los productos del archivo .json
 
-    const index = parseInt(products.findIndex((product) => product.id === pid)); // se busca el producto cuyo id coincida con el ingresado
+    const index = products.findIndex((product) => product.id === pid); // se busca el producto cuyo id coincida con el ingresado
     
     
     products[index] = {
