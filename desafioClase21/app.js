@@ -3,16 +3,20 @@ import router from './src/routes/index.js'; // importamos el router principal
 import { connectMongoDB } from './src/config/mongoDb.config.js';
 import session from "express-session"; // importamos el módulo de session
 import MongoStore from 'connect-mongo';
+import passport from 'passport';
+import initializePassport from './src/config/passport.config.js';
+import cookieParser from 'cookie-parser';
 
 connectMongoDB(); // llamamos a la función para conectar con la base de datos de mongo
 //para crear una aplicación/servidor de express
 
 const app = express();
 
-const urlDbMongo = "mongodb+srv://adroamarillo:amarill0DB@e-commerce.vohxlk3.mongodb.net/ecommerce"; // utilizar url de Mongo 
+const urlDbMongo = ""; // utilizar url de Mongo 
 //para configurar el servidor con determinadas funcionalidades se aplican los middlewares
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); //para leer queries y params
+app.use(cookieParser("secreto")); //configuramos el cookieParser con el código "secret"
 app.use(session({ // configuramos nuestro modulo session
     store: MongoStore.create({ // vinculamos al sesión con Mongo Atlas
         mongoUrl: urlDbMongo, // Utilizamos la misma URL de nuestro Mongo Atlas
@@ -22,6 +26,9 @@ app.use(session({ // configuramos nuestro modulo session
     resave: true,
     saveUninitialized: true
 }));
+app.use(passport.initialize()); // middleware para inicializar Passport
+app.use(passport.session()); // control de sesiones
+initializePassport(); // inicializamos la función que contiene las estrategias
 
 //para configurar las rutas
 app.use("/api", router);
