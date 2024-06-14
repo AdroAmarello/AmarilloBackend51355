@@ -9,7 +9,7 @@ connectMongoDB(); // llamamos a la función para conectar con la base de datos d
 
 const app = express();
 
-const urlDbMongo = "mongodb+srv://adroamarillo:amarill0DB@e-commerce.vohxlk3.mongodb.net/ecommerce"; // utilizar url de Mongo 
+const urlDbMongo = ""; // utilizar url de Mongo 
 //para configurar el servidor con determinadas funcionalidades se aplican los middlewares
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); //para leer queries y params
