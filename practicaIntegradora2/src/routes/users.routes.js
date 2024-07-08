@@ -1,13 +1,14 @@
 import { Router } from "express";
 import passport from "passport";
 import { createToken } from "../utils/jwt.js";
+import { checkLogin } from "../middlewares/checkLogin.middlewares.js";
 
 const router = Router();
 
 
 //creamos solicitud/peticiones
 router.post("/register", passport.authenticate("register"), registerUser);
-router.post("/login", passport.authenticate("login", {session: false}), loginUser);
+router.post("/login", checkLogin, passport.authenticate("login", {session: false}), loginUser);
 
 //Configuramos callbacks
 //lógica de registro de usuarios
