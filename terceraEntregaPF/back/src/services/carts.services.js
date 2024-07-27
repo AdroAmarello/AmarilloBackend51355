@@ -1,0 +1,56 @@
+import cartsRepository from "../persistences/mongo/repositories/carts.repository.js";
+import productsRepository from "../persistences/mongo/repositories/products.repository.js";
+
+const createCart = async () => {
+    return await cartsRepository.createCart();
+};
+
+const getCartById = async (id) => {
+    return await cartsRepository.getCartById(id);
+};
+
+const addProductToCart = async (cid, pid) => {
+    return await cartsRepository.addProductToCart(cid, pid);
+};
+
+const updateQuantityOfProduct = async (cid, pid, quantity) => {
+    return await cartsRepository.updateQuantityOfProduct(cid, pid, quantity);
+};
+
+const deleteProductFromCart = async (cid, pid) => {
+    return await cartsRepository.deleteProductFromCart(cid, pid);
+};
+
+const clearCart = async (cid) => {
+    return await cartsRepository.clearCart(cid);
+};
+
+const purchaseCart = async (cid) => { // creamos el servicio de carrito de compra
+    const cart = await cartsRepository.getCartById(cid); // tomamos el carrito mediando el id
+    let total = 0;
+    const productsWithoutStock = []; // array donde se almacenarán los productos que no tienen stock
+
+    for (const product of cart.products) {
+        const prod = await productsRepository.getProductById(product.product);
+        if (prod.stock >= product.quantity) { // si el stock del producto es mayor a la cantidad de productos dentro del carrito multiplica el precio del producto por la cantidad en el carrito
+            total += prod.price * product.quantity;
+        }else {
+            productsWithoutStock.push(product); // en caso de que no se cumpla la primer condición pushea el producto en el array 
+        }
+
+        //Modificar los productos del carrito
+        await cartsRepository.updateCart(cid, productsWithoutStock);
+    }
+
+    return total;
+}
+
+export default {
+    createCart,
+    getCartById,
+    addProductToCart,
+    updateQuantityOfProduct,
+    deleteProductFromCart,
+    clearCart,
+    purchaseCart,
+}
