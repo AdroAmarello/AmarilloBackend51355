@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 import envs from "./src/config/env.config.js"
 import cors from "cors";
 import { errorHandler } from './src/errors/errorHandle.js';
-import { logger } from '../desafioClase34/src/utils/logger.js';
+import { logger } from './src/utils/logger.js';
 
 connectMongoDB(); // llamamos a la función para conectar con la base de datos de mongo
 //para crear una aplicación/servidor de express
@@ -41,8 +41,8 @@ app.use("/api", router);
 app.use(errorHandler); // middleware para controlar errores
 
 // para inicializar la app de express configuro el puerto
-const port = envs.PORT; // 
-const ready = console.log("Server ready on port "+port); //se define callback con mensaje de que el servidor se encuentra activo
+const port = envs.PORT; 
+const ready = logger.info("Server ready on port " + port); //se define callback con mensaje de que el servidor se encuentra activo utilizando "logger"
 
 //para inicializar el servidor
 app.listen(port, ready);
