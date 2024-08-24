@@ -15,8 +15,8 @@ router.get("/", productsController.getProducts);
 router.get("/:pid", checkId, productsController.getProductById);
 
 
-router.post("/", passportCall("jwt"), authorization("admin"), /* productDataValidator, */ productsController.createProduct);
-router.put("/:pid", checkId, passportCall("jwt"), authorization("admin"), productsController.updateProductById);
-router.delete("/:pid", checkId, passportCall("jwt"), authorization("admin"),  productsController.deleteProductById);
+router.post("/", passportCall("jwt"), authorization(["admin", "premium"]), /* productDataValidator, */ productsController.createProduct);
+router.put("/:pid", checkId, passportCall("jwt"), authorization(["admin", "premium"]), productsController.updateProductById);
+router.delete("/:pid", checkId, passportCall("jwt"), authorization(["admin", "premium"]),  productsController.deleteProductById);
 
 export default router;

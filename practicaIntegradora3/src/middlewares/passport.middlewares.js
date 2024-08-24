@@ -1,5 +1,6 @@
 import { request, response } from "express";
 import passport from "passport";
+import customErrors from "../errors/customErrors.js";
 
 
 export const passportCall = (strategy) => { // creamos una función que va a recibir una estrategia
@@ -19,14 +20,22 @@ export const passportCall = (strategy) => { // creamos una función que va a rec
     }; 
 };
 
-export const authorization = (role) => { // con la función "authorization" verificamos si tienen permisos según el "role" que tenga el usuario
+export const authorization = (roles) => { // con la función "authorization" verificamos si tienen permisos según el "role" que tenga el usuario
 
     return async (req = request, res = response , next) => {
-        
-        if (!req.user) return res.status(401).json({status: "error", message: "Unauthorized"});
-        if (req.user.role !== role) return res.status(403).json({status: "error", message: "User is not authorized"});
+        try {
+            if (!req.user) throw customErrors.notFoundError("User not found");
+            const roleAuthorized = roles.includes(req.user.role);
+            if (!roleAuthorized) throw customErrors.unauthorizedError("User not authorized");
 
-        next();
+            next();
+
+        } catch (error) {
+            logger.error(error);
+            next(error);
+            
+        }
+        
     }
 }
 

@@ -12,7 +12,13 @@ const getCartById = async (id) => {
     return cart
 };
 
-const addProductToCart = async (cid, pid) => {
+const addProductToCart = async (cid, pid, user) => {
+    const product = await productsRepository.getProductById(pid);
+
+    if (user.role === "premium" && product.owner === user._id) {
+        throw error.unauthorizedError("User not authorized to add this product")
+    }
+
     return await cartsRepository.addProductToCart(cid, pid);
 };
 

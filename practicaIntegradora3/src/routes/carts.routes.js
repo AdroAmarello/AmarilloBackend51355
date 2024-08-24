@@ -9,12 +9,12 @@ const router = Router();
 
 // creamos solicitud/peticiones
 router.post("/", passportCall("jwt"), authorization("user"), cartsController.createCart);
-router.get("/:cid", checkId, passportCall("jwt"), authorization("user"), cartsController.getCartById);
-router.post("/:cid/product/:pid", checkId, passportCall("jwt"), authorization("user"), isUserCart, checkProductAndCart,  cartsController.addProductToCart);
+router.get("/:cid", checkId, passportCall("jwt"), authorization(["user", "premium"]), cartsController.getCartById);
+router.post("/:cid/product/:pid", checkId, passportCall("jwt"), authorization(["user", "premium"]), isUserCart, checkProductAndCart,  cartsController.addProductToCart);
 router.put("/:cid/product/:pid", checkId, passportCall("jwt"), authorization("user"), checkProductAndCart, cartsController.updateQuantityOfProduct);
-router.delete("/:cid/product/:pid", checkId, passportCall("jwt"), authorization("user"), checkProductAndCart, cartsController.deleteProductFromCart);
-router.delete("/:cid", checkId, passportCall("jwt"), authorization("user"), cartsController.clearCart);
+router.delete("/:cid/product/:pid", checkId, passportCall("jwt"), authorization(["user", "premium"]), checkProductAndCart, cartsController.deleteProductFromCart);
+router.delete("/:cid", checkId, passportCall("jwt"), authorization(["user", "premium"]), cartsController.clearCart);
 
-router.get("/:cid/purchase", checkId, passportCall("jwt"), authorization("user"), cartsController.purchaseCart);
+router.get("/:cid/purchase", checkId, passportCall("jwt"), authorization(["user", "premium"]), cartsController.purchaseCart);
 
 export default router;

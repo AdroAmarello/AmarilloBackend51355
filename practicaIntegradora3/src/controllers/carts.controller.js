@@ -34,7 +34,7 @@ async function getCartById (req, res, next) {
 async function addProductToCart (req, res, next) {
     try {
         const { cid, pid } = req.params;
-        const cart = await cartsServices.addProductToCart(cid, pid);
+        const cart = await cartsServices.addProductToCart(cid, pid, req.user);
                 
         return res.status(200).json({ status: "success", response: cart}); // se muestra el carrito con el id correspondiente
         

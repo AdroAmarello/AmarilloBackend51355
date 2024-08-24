@@ -67,7 +67,7 @@ async function createProduct(req, res, next) {
 	try {
 		const product = req.body;
 
-		const newProduct = await productsServices.createProduct(product);
+		const newProduct = await productsServices.createProduct(product, req.user);
 
 		return res.json({ status: 201, response: newProduct });
 	} catch (error) {
@@ -96,7 +96,7 @@ async function deleteProductById(req, res, next) {
 	try {
 		const { pid } = req.params;
 
-		const product = await productsServices.deleteProductById(pid); // guardamos la respuesta en una constante que sera de tipo boolean
+		const product = await productsServices.deleteProductById(pid, req.user); // guardamos la respuesta en una constante que sera de tipo boolean
 		return res.json({ status: 200, response: `El producto con ID ${pid} ha sido eliminado`}); // se asigna código de status y se informa la eliminación
 		
 	} catch (error) {
