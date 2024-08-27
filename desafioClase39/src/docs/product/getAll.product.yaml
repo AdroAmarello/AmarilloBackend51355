@@ -20,15 +20,15 @@ components:
     Products:
       type: object
       properties:
-        id:
+        _id:
           type: ObjectId
           example: 618f1a7b3b1cb400159f2c9e
         title:
           type: string
-          example: Producto 1 de ejemplo
+          example: Product 1 of example
         description:
           type: string
-          example: Este es el primer producto de ejemplo.
+          example: This is the first product of example.
         thumbnail:
           type: string
           example: ["www.google.com"]
@@ -36,11 +36,11 @@ components:
           type: string
           example: PROD001
         stock:
-          type: number
+          type: integer
           example: 5
         price:
           type: number
           example: 129900
         category:
           type: string
-          example: Ejemplos
+          example: Examples

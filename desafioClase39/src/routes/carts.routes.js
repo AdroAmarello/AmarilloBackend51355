@@ -8,7 +8,7 @@ import { checkId } from "../middlewares/checkId.middlewares.js";
 const router = Router();
 
 // creamos solicitud/peticiones
-router.post("/", passportCall("jwt"), authorization("user"), cartsController.createCart);
+
 router.get("/:cid", checkId, passportCall("jwt"), authorization(["user", "premium"]), cartsController.getCartById);
 router.post("/:cid/product/:pid", checkId, passportCall("jwt"), authorization(["user", "premium"]), isUserCart, checkProductAndCart,  cartsController.addProductToCart);
 router.put("/:cid/product/:pid", checkId, passportCall("jwt"), authorization("user"), checkProductAndCart, cartsController.updateQuantityOfProduct);

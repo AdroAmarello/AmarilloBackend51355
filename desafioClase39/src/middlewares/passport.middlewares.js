@@ -1,6 +1,7 @@
 import { request, response } from "express";
 import passport from "passport";
 import customErrors from "../errors/customErrors.js";
+import { logger } from "../utils/logger.js";
 
 
 export const passportCall = (strategy) => { // creamos una función que va a recibir una estrategia
