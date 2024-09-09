@@ -51,7 +51,7 @@ async function updateQuantityOfProduct (req, res, next) {
         const { quantity } = req.body;
         const cart = await cartsServices.updateQuantityOfProduct(cid, pid, quantity);
         
-        return res.status(200).json({ status: "success", payload: cart}); // se muestra el carrito con el id correspondiente
+        return res.status(200).json({ status: "success", response: cart}); // se muestra el carrito con el id correspondiente
             
     } catch (error) {
         logger.error(error);
@@ -65,7 +65,7 @@ async function deleteProductFromCart (req, res, next) {
         const { cid, pid } = req.params;
         const cart = await cartsServices.deleteProductFromCart(cid, pid);
         
-        return res.status(200).json({ status: "success", payload: cart}); // se muestra el carrito con el id correspondiente
+        return res.status(200).json({ status: "success", response: cart}); // se muestra el carrito con el id correspondiente
         
     } catch (error) {
         logger.error(error);
